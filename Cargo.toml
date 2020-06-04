@@ -1,10 +1,9 @@
 [package]
 version = "0.1.0"
-name = "app_name"
-repository = "https://github.com/seed-rs/seed-quickstart"
+name = "mediarecorder"
 authors = ["Your Name <email@address.com>"]
-description = "App Description"
-categories = ["category"]
+description = "Test accessing JS MediaRecorder."
+categories = ["experimental"]
 license = "MIT"
 readme = "./README.md"
 edition = "2018"
@@ -13,13 +12,11 @@ edition = "2018"
 crate-type = ["cdylib"]
 
 [dev-dependencies]
-wasm-bindgen-test = "0.3.12"
+wasm-bindgen-test = "0.3.13"
 
 [dependencies]
-# Referenced commit fixes base url and memory bugs in Seed 0.7.0
-# (https://github.com/seed-rs/seed/pull/454 + https://github.com/seed-rs/seed/pull/455).
-# Replace with "0.8.0" once the new Seed version is released.
-seed = { git = "https://github.com/seed-rs/seed", rev = "b25cf59" }
+seed = "0.7"
+wasm-bindgen-futures = "0.4"
 
 [profile.release]
 lto = true
@@ -28,3 +25,15 @@ codegen-units = 1
 
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ['-Os']
+
+[dependencies.web-sys]
+version = "0.3.40"
+features = [
+  "MediaDevices",
+  "MediaRecorder",
+  "MediaRecorderOptions",
+  "MediaStream",
+  "MediaStreamConstraints",
+  "Navigator",
+  "Window",
+]
